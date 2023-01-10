@@ -1,23 +1,26 @@
-import logo from './logo.svg';
+import { useState } from 'react';
+import Counter from './Counter';
+import Users from './Users';
 import './App.css';
 
 function App() {
+  const [count, setCount] = useState(0);
+  const [usersVisible, setUsersVisible] = useState(false);
+
+  const incrementCount = () => {
+    setCount(oldCount => oldCount + 1);
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>My App</h1>
+      <Counter
+        count={count}
+        incrementCount={incrementCount}
+      />
+
+      <button onClick={() => setUsersVisible(!usersVisible)}>Toggle users</button>
+      {usersVisible ? <Users /> : ''}
     </div>
   );
 }
